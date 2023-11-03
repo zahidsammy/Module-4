@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ED97C8 ;
+        }
+
+        h1 {
+            font-size: 24px; 
+            color: #333; 
+            text-align: center; 
+            margin-top: 20px; 
+            font-weight: bold; 
+        }
+
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: 0 auto;
+            background-color:#000000 ;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .output {
+            display: flex;
+            flex-direction: column;
+            background-color: #444;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: white;
+            align-items: flex-end;
+        }
+
+        .output-text {
+            margin: 0;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 5px;
+        }
+
+        .button {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #666;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        #btn{
+            margin-bottom: 10px;
+            grid-column: span 2;
+            background-color: #909CB2; 
+        }
+
+        #btn1{
+            background-color: #EF9E0D;
+        }
+
+
+        .container {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Make the container take the full height of the viewport */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Calculator</h1>
+    <div class="container">
+        <div class="calculator">
+            <div class="output">
+                <p class="output-text">0</p>
+            </div>
+
+            <div class="button" value="AC" onclick="clearScreen()" id="btn">AC</div>
+
+            <div class="buttons">
+                <div class="button" data-value="7" onclick="addToDisplay(7)">7</div>
+                <div class="button" data-value="8" onclick="addToDisplay(8)">8</div>
+                <div class="button" data-value="9" onclick="addToDisplay(9)">9</div>
+                <div class="button" id="btn1" data-value="/" onclick="addToDisplay('/')">/</div>
+                <div class="button" data-value="4" onclick="addToDisplay(4)">4</div>
+                <div class="button" data-value="5" onclick="addToDisplay(5)">5</div>
+                <div class="button" data-value="6" onclick="addToDisplay(6)">6</div>
+                <div class="button" id="btn1" data-value="*" onclick="addToDisplay('*')">*</div>
+                <div class="button" data-value="1" onclick="addToDisplay(1)">1</div>
+                <div class="button" data-value="2" onclick="addToDisplay(2)">2</div>
+                <div class="button" data-value="3" onclick="addToDisplay(3)">3</div>
+                <div class="button" id="btn1" data-value="-" onclick="addToDisplay('-')">-</div>
+                <div class="button" data-value="0" onclick="addToDisplay(0)">0</div>
+                <div class="button" data-value="." onclick="addToDisplay('.')">.</div>
+                <div class="button" id="btn1" onclick="calculate()">=</div>
+                <div class="button" id="btn1" data-value="+" onclick="addToDisplay('+')">+</div>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentInput = '';
+
+        function addToDisplay(value) {
+            currentInput += value;
+            document.querySelector('.output-text').textContent = currentInput;
+        }
+
+        function clearScreen() {
+            currentInput = '';
+            document.querySelector('.output-text').textContent = '0';
+        }
+
+        function clearData() {
+            currentInput = '';
+            document.querySelector('.output-text').textContent = '0';
+        }
+
+        function calculate() {
+            try {
+                const result = new Function('return ' + currentInput)();
+                document.querySelector('.output-text').textContent = result;
+                currentInput = result.toString();
+            } catch (error) {
+                document.querySelector('.output-text').textContent = 'Error';
+            }
+        }
+    </script>
+
+    <footer>
+        <p>This is made through an assignment for IOD</p>
+    </footer>
+</body>
+</html>
