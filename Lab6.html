@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Placeholder Posts</title>
+    <!-- Include Bootstrap CSS (you can use a CDN or host the CSS file locally) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">JSON Placeholder Posts</h1>
+        <div class="row" id="post-container">
+            <!-- Posts will be dynamically added here -->
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (you can use a CDN or host the JS file locally) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.9.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Fetch posts from JSON Placeholder API
+        fetch('https://jsonplaceholder.typicode.com/posts')
+            .then(response => response.json())
+            .then(posts => {
+                const postContainer = document.getElementById('post-container');
+                posts.forEach(post => {
+                    const postCard = document.createElement('div');
+                    postCard.className = 'col-md-4 mb-4';
+
+                    postCard.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">${post.title}</h5>
+                                <p class="card-text">${post.body}</p>
+                            </div>
+                        </div>
+                    `;
+
+                    postContainer.appendChild(postCard);
+                });
+            })
+            .catch(error => console.error('Error fetching posts:', error));
+    </script>
+</body>
+</html>
