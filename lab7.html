@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Square Slider</title>
+    <style>
+        .slider-container {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            position: relative;
+            animation: slideUpDown 4s infinite;
+        }
+
+        @keyframes slideUpDown {
+            0%, 100% {
+                top: 0;
+                background-color: #3498db;
+            }
+
+            50% {
+                top: 200px;
+                background-color: #e74c3c;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container"></div>
+</body>
+</html>
